@@ -3,33 +3,47 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Study AI Tutor</title>
+<title>Study AI Tutor Pro</title>
 <style>
-  /* আপনার আগের সব CSS স্টাইল এখানে থাকবে... */
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#0b1120;color:#e2e8f0;font-family:'Segoe UI','Hind Siliguri',system-ui,sans-serif;min-height:100vh}
-  
-  .header{background:linear-gradient(135deg,#131a2e,#1e1b4b);border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:20;}
-  .header-inner{max-width:680px;margin:0 auto;padding:12px 16px}
-  .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-  .title-label{font-size:10px;letter-spacing:2px;color:#f472b6;font-weight:700;}
-  .title-main{font-size:20px;font-weight:900;color:#f1f5f9}
-  
-  .net-pill{border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px}
-  .net-on{background:#064e3b;color:#4ade80;border:1px solid #065f46}
-  .net-off{background:#450a0a;color:#f87171;border:1px solid #7f1d1d}
+  :root {
+    --bg: #080f1e; --card: #0f172a; --accent: #f472b6; --text: #e2e8f0; --muted: #64748b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; font-family: 'Segoe UI', 'Hind Siliguri', sans-serif;}
+  body{background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 50px;}
 
-  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:5px}
-  .tab-btn{padding:8px 16px;border-radius:10px;border:none;font-size:13px;font-weight:600;white-space:nowrap;background:#1e293b;color:#94a3b8}
-  .tab-active{background:#f472b6;color:white}
-  .tab-admin{background:#334155;color:#e2e8f0}
-
-  .wrap{max-width:680px;margin:0 auto;padding:16px}
-  .card{background:#111827;border:1px solid #1e293b;border-radius:16px;padding:16px;margin-bottom:16px}
+  /* Header & Navigation */
+  .header{background: linear-gradient(135deg,#0f172a,#1e1b4b); border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 100;}
+  .header-inner{max-width: 600px; margin: 0 auto; padding: 12px 16px;}
+  .header-top{display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;}
+  .title-main{font-size: 20px; font-weight: 900; background: linear-gradient(90deg,#f472b6,#a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
   
-  /* Admin Panel specific */
-  .admin-input{width:100%;padding:12px;background:#1e293b;border:1px solid #334155;color:white;border-radius:8px;margin-bottom:10px}
-  .btn-save{background:#22c55e;color:white;padding:12px;border:none;border-radius:8px;width:100%;font-weight:700}
+  .net-pill{padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700;}
+  .net-on{background: #064e3b; color: #4ade80; border: 1px solid #065f46;}
+  .net-off{background: #450a0a; color: #f87171; border: 1px solid #7f1d1d;}
+
+  .tabs{display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;}
+  .tab-btn{padding: 8px 16px; border-radius: 10px; border: none; background: #1e293b; color: var(--muted); font-weight: 700; white-space: nowrap; cursor: pointer;}
+  .tab-btn.active{background: linear-gradient(135deg,#f472b6,#a855f7); color: white;}
+
+  /* Cards & Layout */
+  .wrap{max-width: 600px; margin: 0 auto; padding: 16px;}
+  .card{background: var(--card); border: 1px solid #1e293b; border-radius: 16px; padding: 16px; margin-bottom: 16px;}
+  
+  .stat-grid{display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px;}
+  .stat-box{background: #111827; padding: 12px; border-radius: 12px; text-align: center;}
+  .stat-num{font-size: 18px; font-weight: 900; color: #f1f5f9; display: block;}
+  .stat-lbl{font-size: 10px; color: var(--muted); text-transform: uppercase;}
+
+  .topic-item{display: flex; align-items: center; gap: 12px; padding: 14px; background: #111827; border-radius: 12px; margin-top: 10px; border: 1px solid transparent;}
+  .topic-item:active{border-color: var(--accent);}
+  .btn-start{margin-left: auto; background: none; border: none; color: var(--accent); font-weight: 700; cursor: pointer;}
+
+  /* Tutor Interface */
+  .tutor-bubble{display: flex; gap: 10px; background: #1e1b4b; padding: 15px; border-radius: 15px; border: 1px solid #4338ca; margin-bottom: 15px;}
+  .btn-main{width: 100%; padding: 12px; border-radius: 12px; border: none; background: linear-gradient(135deg,#f472b6,#a855f7); color: white; font-weight: 700; font-size: 15px; cursor: pointer;}
+
+  /* Admin */
+  .admin-input{width: 100%; padding: 12px; background: #111827; border: 1px solid #334155; color: white; border-radius: 10px; margin: 10px 0;}
 </style>
 </head>
 <body>
@@ -38,150 +52,189 @@
   <div class="header-inner">
     <div class="header-top">
       <div>
-        <div class="title-label">STUDY AI TUTOR</div>
+        <div style="font-size: 9px; letter-spacing: 2px; color: var(--accent);">STUDY AI TUTOR</div>
         <div class="title-main">তোমার ব্যক্তিগত শিক্ষক</div>
       </div>
       <div id="netStatus" class="net-pill net-on">🟢 অনলাইন AI মোড</div>
     </div>
     <div class="tabs">
-      <button class="tab-btn tab-active" onclick="showTab('home')">🏠 হোম</button>
-      <button class="tab-btn" onclick="showTab('learn')">📘 শেখো</button>
-      <button class="tab-btn" onclick="showTab('admin')">⚙️ অ্যাডমিন</button>
+      <button class="tab-btn active" id="tab-home" onclick="nav('home')">🏠 হোম</button>
+      <button class="tab-btn" id="tab-learn" onclick="nav('learn')">📘 শেখো</button>
+      <button class="tab-btn" id="tab-admin" onclick="nav('admin')">⚙️ অ্যাডমিন</button>
     </div>
   </div>
 </div>
 
-<div class="wrap" id="mainContent">
-  <!-- Content will load here via JavaScript -->
-</div>
+<div class="wrap" id="app"></div>
 
 <script>
-// ১. রুটিন ডেটা এবং সাবজেক্ট (আগের মতই রাখা হয়েছে)
-const TOPICS = [
+// --- ১) ডাটা সেটিংস (Study Planner v3 থেকে নেওয়া) ---
+const RAW_TOPICS = [
   {subj:"বাংলা ২য়",topic:"পরিচ্ছেদ ১৭ ও ১৮: শব্দের শ্রেণিবিভাগ + বিশেষ্য",icon:"✍️"},
   {subj:"ভূগোল",topic:"৬ষ্ঠ অধ্যায়",icon:"🌐"},
-  // আরও সাবজেক্ট এখানে যোগ করতে পারেন...
+  {subj:"গণিত",topic:"বীজগণিত: অনুশীলনী ২.২",icon:"🔢"},
+  {subj:"বিজ্ঞান",topic:"৪র্থ অধ্যায়",icon:"🔬"},
+  {subj:"ইংরেজি ১ম",topic:"Unit Four: Events and Festivals",icon:"🇬🇧"},
+  {subj:"বাংলা ১ম",topic:"পল্লী সাহিত্য (গদ্য)",icon:"📖"},
+  {subj:"আইসিটি",topic:"১ম অধ্যায়",icon:"💻"},
+  {subj:"ইসলাম শিক্ষা",topic:"৩য় অধ্যায়: ইবাদত",icon:"☪️"},
+  {subj:"বাংলাদেশ ও বিশ্বপরিচয়",topic:"৫ম অধ্যায়",icon:"🌍"},
+  {subj:"অর্থনীতি",topic:"৪র্থ অধ্যায়",icon:"💰"}
+  // আপনি এখানে আপনার আগের ৫০টি টপিক পেস্ট করতে পারেন।
 ];
 
-// ২. অ্যাডমিন সেটিংস লোড করা
-let settings = JSON.parse(localStorage.getItem('study_settings')) || {
-  routineStart: "2026-07-20",
-  activeTab: "home"
+let state = JSON.parse(localStorage.getItem('ai_tutor_pro')) || {
+  startDate: new Date().toISOString().split('T')[0],
+  xp: 0,
+  level: 1,
+  streak: 0,
+  completed: [],
+  currentTab: 'home',
+  selectedTopic: null
 };
 
-// ৩. অনলাইন/অফলাইন চেক করার উন্নত লজিক
-function updateNetStatus() {
-  const pill = document.getElementById('netStatus');
-  if (navigator.onLine) {
-    pill.innerHTML = "🟢 অনলাইন AI মোড";
-    pill.className = "net-pill net-on";
-  } else {
-    pill.innerHTML = "🔴 অফলাইন মোড";
-    pill.className = "net-pill net-off";
-  }
-}
-window.addEventListener('online', updateNetStatus);
-window.addEventListener('offline', updateNetStatus);
+function save() { localStorage.setItem('ai_tutor_pro', JSON.stringify(state)); }
 
-// ৪. ট্যাব সুইচিং ফাংশন
-function showTab(tab) {
-  settings.activeTab = tab;
+// --- ২) রুটিন লজিক (Planner v3 স্টাইল) ---
+function getTodaysTopics() {
+  const start = new Date(state.startDate);
+  const today = new Date();
+  const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+  
+  if (diffDays < 0) return []; // রুটিন শুরু হয়নি
+  
+  const idx = diffDays * 2;
+  return RAW_TOPICS.slice(idx, idx + 2);
+}
+
+// --- ৩) নেভিগেশন ও রেন্ডার ---
+function nav(t) {
+  state.currentTab = t;
   render();
 }
 
-// ৫. রেন্ডার ফাংশন (UI তৈরি)
-function render() {
-  const container = document.getElementById('mainContent');
-  const tab = settings.activeTab;
-  
-  // ট্যাব হাইলাইট ঠিক করা
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.remove('tab-active');
-    if(btn.innerText.toLowerCase().includes(tab === 'admin' ? 'অ্যাডমিন' : (tab === 'home' ? 'হোম' : 'শেখো'))) {
-        btn.classList.add('tab-active');
-    }
-  });
+function startLearning(topic) {
+  state.selectedTopic = topic;
+  state.currentTab = 'learn';
+  render();
+}
 
-  if (tab === 'home') {
-    container.innerHTML = `
+function render() {
+  save();
+  const app = document.getElementById('app');
+  const todays = getTodaysTopics();
+
+  // আপডেট ট্যাব হাইলাইট
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + state.currentTab).classList.add('active');
+
+  if (state.currentTab === 'home') {
+    app.innerHTML = `
       <div class="card">
-        <p class="title-label">স্বাগতম 👋</p>
-        <h2 style="margin:8px 0">আজকের লক্ষ্য পূরণ করো</h2>
-        <div style="display:flex; justify-content:space-between; margin-top:20px">
-           <div style="text-align:center"><strong>0</strong><br><small>XP</small></div>
-           <div style="text-align:center"><strong>1</strong><br><small>লেভেল</small></div>
-           <div style="text-align:center"><strong>0/50</strong><br><small>টপিক শেষ</small></div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:14px; font-weight:800;">স্বাগতম 👋</span>
+          <span style="font-size:20px;">🔥 ${state.streak} দিন</span>
+        </div>
+        <h2 style="margin-top:5px;">আজকের লক্ষ্য পূরণ করো</h2>
+        <div class="stat-grid">
+          <div class="stat-box"><span class="stat-num">${state.xp}</span><span class="stat-lbl">XP</span></div>
+          <div class="stat-box"><span class="stat-num">${state.level}</span><span class="stat-lbl">লেভেল</span></div>
+          <div class="stat-box"><span class="stat-num">${state.completed.length}/50</span><span class="stat-lbl">শেষ</span></div>
         </div>
       </div>
+
       <div class="card">
-        <p>📅 আজকের পড়া (${settings.routineStart} থেকে চালু)</p>
-        ${TOPICS.map(t => `
-          <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #1e293b">
-            <span style="font-size:24px">${t.icon}</span>
-            <div style="flex:1">
-              <div style="color:#f472b6; font-size:11px; font-weight:700">${t.subj}</div>
-              <div style="font-weight:600">${t.topic}</div>
+        <h3 style="font-size:14px; margin-bottom:10px;">📅 আজকের পড়া</h3>
+        ${todays.length === 0 ? '<p style="color:var(--muted); text-align:center;">রুটিন অনুযায়ী আজ কোনো পড়া নেই। অ্যাডমিন থেকে তারিখ ঠিক করুন।</p>' : ''}
+        ${todays.map(t => `
+          <div class="topic-item">
+            <span style="font-size:24px;">${t.icon}</span>
+            <div>
+              <div style="font-size:10px; color:var(--accent); font-weight:700;">${t.subj}</div>
+              <div style="font-size:13px; font-weight:600;">${t.topic}</div>
             </div>
-            <button style="background:none; border:none; color:#94a3b8">শুরু করো ›</button>
+            <button class="btn-start" onclick='startLearning(${JSON.stringify(t)})'>শুরু করো ›</button>
           </div>
         `).join('')}
       </div>
     `;
   } 
-  
-  else if (tab === 'learn') {
-    // এখানে অফলাইন মোড হ্যান্ডলিং
-    if (!navigator.onLine) {
-        container.innerHTML = `
-          <div class="card" style="border-color:#7f1d1d; background:#1a0b0b">
-            <p style="color:#f87171">🔴 অফলাইন মোড: নিচের কনটেন্ট সাধারণ নির্দেশনা। ইন্টারনেট থাকলে বিস্তারিত AI ব্যাখ্যা পাবে।</p>
-          </div>
-          <div class="card">
-            <h3>📖 সারসংক্ষেপ</h3>
-            <p style="margin-top:10px; color:#94a3b8">বই থেকে মূল পরিচ্ছেদটি পড়ুন। নেট কানেক্ট হলে AI টিউটর এখানে ব্যাখ্যা দেখাবে।</p>
-          </div>
-        `;
-    } else {
-        container.innerHTML = `
-          <div class="card">
-            <div style="display:flex; gap:10px; align-items:center">
-              <span style="background:#1e293b; padding:10px; border-radius:50%">🧑‍🏫</span>
-              <p>আজ আমরা "${TOPICS[0].topic}" শিখব। তুমি কি প্রস্তুত? 😊</p>
-            </div>
-          </div>
-          <button class="btn-save" style="background:#f472b6">✅ হ্যাঁ, প্রস্তুত!</button>
-        `;
+
+  else if (state.currentTab === 'learn') {
+    if (!state.selectedTopic) {
+      app.innerHTML = `<div class="card" style="text-align:center;">আগে হোম পেজ থেকে একটি টপিক বেছে নাও।</div>`;
+      return;
     }
+    
+    app.innerHTML = `
+      <div class="tutor-bubble">
+        <div style="font-size:24px;">🧑‍🏫</div>
+        <div>
+          <p style="font-size:14px; line-height:1.6;">
+            আজ আমরা <b>"${state.selectedTopic.topic}"</b> (${state.selectedTopic.subj}) নিয়ে আলোচনা করব। 
+            <br><br>
+            ${navigator.onLine ? 'আমি প্রস্তুত! এই টপিকটি তোমাকে সহজভাবে বুঝিয়ে দিচ্ছি। তুমি কি শুরু করতে চাও?' : '🔴 তুমি অফলাইনে আছো। ইন্টারনেট কানেক্ট করলে আমি তোমাকে বিস্তারিত বুঝিয়ে বলতে পারব।'}
+          </p>
+        </div>
+      </div>
+      <button class="btn-main" onclick="completeTopic()">✅ হ্যাঁ, আমি প্রস্তুত!</button>
+    `;
   }
 
-  else if (tab === 'admin') {
-    container.innerHTML = `
+  else if (state.currentTab === 'admin') {
+    app.innerHTML = `
       <div class="card">
         <h3>⚙️ অ্যাডমিন প্যানেল</h3>
-        <p style="margin:10px 0; font-size:13px; color:#94a3b8">রুটিন শুরুর তারিখ সেট করো। এর উপর ভিত্তি করে প্রতিদিনের পড়া দেখাবে।</p>
-        <label style="font-size:12px">রুটিন শুরুর তারিখ:</label>
-        <input type="date" id="startDate" class="admin-input" value="${settings.routineStart}">
-        <button class="btn-save" onclick="saveAdminSettings()">সেভ সেটিংস</button>
+        <p style="font-size:12px; color:var(--muted); margin:10px 0;">রুটিন কবে থেকে শুরু হবে তার তারিখ সেট করো।</p>
+        
+        <label style="font-size:12px; font-weight:700;">রুটিন শুরুর তারিখ:</label>
+        <input type="date" id="adminDate" class="admin-input" value="${state.startDate}">
+        
+        <button class="btn-main" onclick="saveAdmin()">সেভ সেটিংস</button>
+        <button class="btn-main" style="margin-top:10px; background:#1e293b;" onclick="resetAll()">সব রিসেট করো</button>
       </div>
     `;
   }
 }
 
-// ৬. অ্যাডমিন সেটিংস সেভ করা
-function saveAdminSettings() {
-  const date = document.getElementById('startDate').value;
-  if(date) {
-    settings.routineStart = date;
-    localStorage.setItem('study_settings', JSON.stringify(settings));
+// --- ৪) অ্যাডমিন ফাংশনস ---
+function saveAdmin() {
+  const d = document.getElementById('adminDate').value;
+  if(d) {
+    state.startDate = d;
     alert('সেটিংস সেভ হয়েছে!');
-    showTab('home');
+    nav('home');
   }
 }
 
-// প্রথমবার রেন্ডার
-updateNetStatus();
+function completeTopic() {
+  if(!navigator.onLine) { alert('ইন্টারনেট ছাড়া AI কাজ করবে না!'); return; }
+  state.xp += 20;
+  state.level = Math.floor(state.xp / 100) + 1;
+  state.completed.push(state.selectedTopic.topic);
+  alert('চমৎকার! তুমি ২০ XP পেয়েছো।');
+  state.selectedTopic = null;
+  nav('home');
+}
+
+function resetAll() {
+  if(confirm('তুমি কি সব প্রগ্রেস মুছে ফেলতে চাও?')) {
+    localStorage.removeItem('ai_tutor_pro');
+    location.reload();
+  }
+}
+
+// নেটওয়ার্ক চেক
+window.addEventListener('online', () => { 
+  document.getElementById('netStatus').className = "net-pill net-on"; 
+  document.getElementById('netStatus').innerText = "🟢 অনলাইন AI মোড";
+});
+window.addEventListener('offline', () => { 
+  document.getElementById('netStatus').className = "net-pill net-off"; 
+  document.getElementById('netStatus').innerText = "🔴 অফলাইন মোড";
+});
+
 render();
 </script>
-
 </body>
 </html>
